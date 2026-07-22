@@ -14,7 +14,7 @@ For each prompt below, write your response in the space provided. Aim to answer 
 In your own words, define what **inheritance** is in object-oriented programming. Then, explain what benefits it provides to developers who use it. Consider what problem it solves — what would be harder or messier without inheritance?
 
 ## Response 1
-
+Inheritence is an object-oriented programming concept where one class, called a child or sub-class, can reuse or extend the properties and methods of another parent or superclass. Inheritence allows shared behavior to be written once and reused across the related sub-classes. This reduces repeating code. Without inheritence, the same logic would have to be written out in many different places, which can be messy and holds more errors.
 ---
 
 ## Prompt 2
@@ -39,8 +39,8 @@ const rex = new Puppy();
 
 Explain what happens when `rex.eat()` is invoked. In your answer, describe the role of **inheritance** and the **prototype chain**.
 
-## Response 3
-
+## Response 2
+When `rex.eat()` is called, Javascript first looks for the `eat` method on the `Puppy` class since `rex` is an instance of the `Puppy` class. Since the `Puppy` class does not define it, Javascript follows the prototype chain up to `Dog`, and again the `eat` method is not defined there, so it goes up to `Animal` where eat is actually defined. This works because of inheritance, which allows `Puppy` to inherit methods from both `Dog` and `Animal`. As a result, `rex` can access methods defined higher up in the class hierarchy.
 --- 
 
 ## Prompt 3
@@ -60,11 +60,11 @@ class Employee {
 
 class Manager extends Employee {
   constructor(name, salary, department) {
-    // YOUR CODE HERE
+    super(name, salary)
+    this.department = department
   }
   getDetails() {
-    // YOUR CODE HERE - should include both the Employee details 
-    // AND the department info
+    return `${super.getDetails()} and manages the ${this.department} department`
   }
 }
 ```
@@ -72,3 +72,4 @@ class Manager extends Employee {
 Complete the `Manager` class by filling in the `constructor` and `getDetails` methods. Explain why you need to use `super` in each method and what would happen if you didn't use it.
 
 ## Response 3
+The `super` keyword is needed in the constructor to call the parent class's constructor and properly use any inherited properties like `name` and `salary`. Without calling `super`, `this` cannot be used and an error will be thrown. In `getDetails` `super` allows the `Manager` class to reuse the `Employee` version of the method and extend it with any additional changes. 
